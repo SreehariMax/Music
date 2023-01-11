@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    tools:context=".MainActivity" >
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="70dp"
+        android:orientation="horizontal"
+        android:layout_marginTop="30dp"
+        android:layout_marginStart="10dp"
+        android:layout_marginEnd="10dp"
+        android:gravity="center_horizontal">
+
+        <Button
+            android:layout_width="100dp"
+            android:layout_height="60dp"
+            android:text="Play"
+            android:onClick="play"
+            >
+        </Button>
+        <Button
+            android:layout_width="100dp"
+            android:layout_height="60dp"
+            android:text="pause"
+            android:layout_marginRight="10dp"
+            android:layout_marginLeft="10dp"
+            android:onClick="pause">
+        </Button>
+        <Button
+            android:layout_width="100dp"
+            android:layout_height="60dp"
+            android:text="stop"
+            android:onClick="stop">
+        </Button>
+
+
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="20dp">
+        <ListView
+            android:id="@+id/lst"
+            android:divider="@color/black"
+            android:dividerHeight="5dp"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+        </ListView>
+
+    </LinearLayout>
+
+    </LinearLayout>
+
+
+
