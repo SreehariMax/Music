@@ -8,20 +8,59 @@ import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
+import android.widget.SeekBar;
 import android.widget.Toast;
+
+import java.util.Timer;
+import java.util.TimerTask;
 
 public class MainActivity extends AppCompatActivity {
 
-    MediaPlayer player;
+    MediaPlayer player = null;
     ListView list;
     String [] st = {"Song1", "Song2", "Song3"};
+    SeekBar seekBar;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+        player = MediaPlayer.create(this,R.raw.song3);
 
+        seekBar = findViewById(R.id.seek);
         list = findViewById(R.id.lst);
+
+
+        seekBar.setMax(player.getDuration());
+
+        new Timer().schedule(new TimerTask() {
+            @Override
+            public void run() {
+                if (player != null) {
+
+                    seekBar.setProgress(player.getCurrentPosition());
+
+                }
+            }
+        },0,900);
+
+        seekBar.setOnSeekBarChangeListener(new SeekBar.OnSeekBarChangeListener() {
+            @Override
+            public void onProgressChanged(SeekBar seekBar, int  progress, boolean b) {
+                player.seekTo(progress);
+
+            }
+
+            @Override
+            public void onStartTrackingTouch(SeekBar seekBar) {
+
+            }
+
+            @Override
+            public void onStopTrackingTouch(SeekBar seekBar) {
+
+            }
+        });
 
         ArrayAdapter <String> arr = new ArrayAdapter<String>(this, androidx.appcompat.R.layout.support_simple_spinner_dropdown_item,st);
         list.setAdapter(arr);
