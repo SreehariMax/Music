@@ -1,9 +1,12 @@
 package com.example.music;
 
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.media.MediaPlayer;
 import android.os.Bundle;
+import android.view.Menu;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
@@ -21,22 +24,26 @@ public class MainActivity extends AppCompatActivity {
     String [] st = {"Song1", "Song2", "Song3"};
     SeekBar seekBar;
 
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+
+
         player = MediaPlayer.create(this,R.raw.song3);
 
         seekBar = findViewById(R.id.seek);
         list = findViewById(R.id.lst);
 
 
-        seekBar.setMax(player.getDuration());
+
 
         new Timer().schedule(new TimerTask() {
             @Override
             public void run() {
                 if (player != null) {
+                    seekBar.setMax(player.getDuration());
 
                     seekBar.setProgress(player.getCurrentPosition());
 
@@ -47,7 +54,6 @@ public class MainActivity extends AppCompatActivity {
         seekBar.setOnSeekBarChangeListener(new SeekBar.OnSeekBarChangeListener() {
             @Override
             public void onProgressChanged(SeekBar seekBar, int  progress, boolean b) {
-                player.seekTo(progress);
 
             }
 
@@ -58,6 +64,8 @@ public class MainActivity extends AppCompatActivity {
 
             @Override
             public void onStopTrackingTouch(SeekBar seekBar) {
+
+                player.seekTo(seekBar.getProgress());
 
             }
         });
@@ -95,6 +103,20 @@ public class MainActivity extends AppCompatActivity {
 
 
     }
+
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        getMenuInflater().inflate(R.menu.options, menu);
+        return true;
+    }
+
+    @Override
+    public boolean onContextItemSelected(@NonNull MenuItem item) {
+        return super.onContextItemSelected(item);
+
+    }
+
+
 
     public void play(View v) {
         if (player == null){
